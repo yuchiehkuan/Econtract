@@ -1,0 +1,11 @@
+{
+  "name": "Econtract",
+  "version": "1.0.0",
+  "description": "Econtract project",
+  "dependencies": {
+    "ganache-cli": "^6.12.2",
+    "http-server": "^0.12.3",
+    "js-cookie": "^2.2.1",
+    "web3": "^1.0.0-beta.29"
+  }
+}
