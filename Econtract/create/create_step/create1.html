@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../main.css">
+        <link rel="stylesheet" href="../create.css">
+        <script src="https://kit.fontawesome.com/57bd783e21.js" crossorigin="anonymous"></script>
+        <script src="../create.js"></script> 
+    </head>
+    <body>
+        <ul>
+            <li><a href="../../home.html">Home</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars fa-1g"></i></a>
+              <div class="dropdown-content">
+                <a href="../../account/account.html">帳號資訊</a>
+                <a href="#home">創建合約</a>
+                <a href="../../search/search.php">查詢合約</a>
+                <a href="../../transaction/transaction.html">系統對帳</a>
+                <a href="../../login/login.html">登出</a>
+              </div>
+            </li>
+        </ul><br>
+        <fieldset>
+            <form action="./create2.php" method="POST">
+            <label>合約名稱：</label>
+            <input type="text" id="contract_name" name="contract_name" placeholder="合約名稱"><br>
+            
+            <label>合約目的：</label>
+            <textarea type="text" id="contract_purpose" name="contract_purpose" placeholder="合約目的" ></textarea><br> 
+            <br> 
+            <input type="submit" value="Next">
+            </form>
+        </fieldset>
+    </body>
+</html>

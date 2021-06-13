@@ -1,0 +1,69 @@
+var web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:8545");
+var btn = document.getElementById('Register');
+function createEth() {
+    if(confirmpwd()) {
+        try {
+            var pwd = document.getElementById('pwd').value;
+            var eth_account = document.getElementById('eth_account');
+            this.web3.eth.personal.newAccount(pwd).then(function(){
+                web3.eth.getAccounts().then(function(res){ accounts = res;});
+            });
+            var accounts_len = accounts.length;
+            EthAccount = accounts[accounts_len - 1];
+            eth_account.value = EthAccount;
+            console.log(eth_account.value);
+            return true;
+    //         let balance = await web3.eth.getBalance(EthAccount);
+    //         var html_account = document.getElementById("account");
+    //         var html_balance = document.getElementById("balance");
+    //         html_account.textContent = defaultAccount;
+    //         html_balance.textContent = web3.utils.fromWei(balance, "ether");
+        } catch(err) {
+            console.error("Error:", err);
+            return false;
+        }
+    }
+}
+
+function confirmpwd() {
+    var account = document.getElementById('account').value;
+    var pwd = document.getElementById('pwd').value;
+    var cpwd = document.getElementById('cpwd').value;
+    var firstname = document.getElementById('firstname').value;
+    var lastname = document.getElementById('lastname').value;
+    var male = document.getElementById('male').checked;
+    var female = document.getElementById('female').checked;
+    var mobile = document.getElementById('mobile').value;
+    var err = document.getElementById('error');
+    var err2 = document.getElementById('error2');
+    var chkvalue = [{id: account, value: '帳號'} , {id: pwd, value: '密碼'}, {id: firstname, value: '姓氏'}, {id: lastname, value: '名字'}, {id: mobile, value: '電話'}];
+    chkvalues = "";
+
+    for (let i=0 ; i < chkvalue.length ; i++) {
+        if (chkvalue[i].id == '') {
+            chkvalues += chkvalue[i].value + ' ';
+        }
+    }
+    if (!male && !female) {
+        chkvalues += '性別';
+    }
+    if (chkvalues != "") {
+        err.innerHTML= chkvalues + "不能為空！";
+        if (pwd !== cpwd) {
+            err2.innerHTML="密碼不符！";
+            return false;
+        } else {
+            err2.innerHTML="";
+        }
+        return false;
+    } else {
+        err.innerHTML= "";
+        if (pwd !== cpwd) {
+            err2.innerHTML="密碼不符！";
+            return false;
+        } else {
+            err2.innerHTML="";
+            return true;
+        }
+    }
+}

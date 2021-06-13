@@ -125,6 +125,6 @@ saveSVGButton.addEventListener("click", function (event) {
   } else {
     var dataURL = signaturePad.toDataURL('image/svg+xml');
     download(dataURL, "signature.svg");
-    location.href="../Webpage/create.html";
+    location.href="../create/create.html";
   }
 });
