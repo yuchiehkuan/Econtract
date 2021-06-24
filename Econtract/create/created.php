@@ -43,7 +43,7 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../../main.css">
-        <link rel="stylesheet" href="../create.css">
+        <link rel="stylesheet" href="./create.css">
         <script src="https://kit.fontawesome.com/57bd783e21.js" crossorigin="anonymous"></script>
     </head>
     <body>
@@ -53,7 +53,7 @@
               <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars fa-1g"></i></a>
               <div class="dropdown-content">
                 <a href="../account/account.php">帳號資訊</a>
-                <a href="#home">創建合約</a>
+                <a href="./create.html">創建合約</a>
                 <a href="../search/search.php">查詢合約</a>
                 <a href="../transaction/transaction.html">系統對帳</a>
                 <a href="../login/login.html">登出</a>
@@ -73,12 +73,39 @@
               <tr><td>聯絡電話</td><td><?php echo $A_mobile;?></td><td><?php echo $B_mobile;?></td></tr>
               <tr><td>聯絡地址</td><td><?php echo $A_address;?></td><td><?php echo $B_address;?></td></tr>
               <tr><td>ETH帳號</td><td><?php echo $A_ethAccount;?></td><td><?php echo $B_ethAccount;?></td></tr>
+              <tr><td>立書人簽名：</td>
+              <?php 
+                $id_A = $contract_Key."user_account_A";
+                $ret5=mysqli_query($link,"SELECT * FROM `contract_sign` where `ID`='$id_A';");
+                if (mysqli_num_rows($ret5)>0) {
+                    while($row5=mysqli_fetch_array($ret5)){
+                      $A_dataURL = $row5['dataURL'];
+                      // header("Content-type: image/png");
+                      // echo $A_dataURL;
+                      echo "<td><img src='$A_dataURL' alt='甲方已簽名'></td>"; 
+                    }
+                } else {
+                  echo "<td>尚未簽名</td>";
+                }
+              ?>
+              <?php 
+                $id_B = $contract_Key."user_account_B";
+                $ret6=mysqli_query($link,"SELECT * FROM `contract_sign` where `ID`='$id_B';");
+                if (mysqli_num_rows($ret6)>0) {
+                    while($row6=mysqli_fetch_array($ret6)){
+                      $B_dataURL = $row6['dataURL'];
+                      echo "<td><img src='$B_dataURL' alt='乙方已簽名'></td></tr>"; 
+                    }
+                } else {
+                  echo "<td>尚未簽名</td></tr>";
+                }
+              ?>
             </table><br>
 
             <label>合約內容(條文)：</label><br><?php echo $contract_content; ?><br>
             <label>交易方式：</label><br>
             <table> 
-              <th>No.</th><th>交易日期</th><th>交易金額</th>
+              <th>交易日期</><th>交易金額</th>
               <?php 
                 $ret=mysqli_query($link,"SELECT * FROM `transaction` where `contract_Key`='$contract_Key'");
                 if (mysqli_num_rows($ret)>0) {
@@ -86,11 +113,23 @@
                     $contract_id = $row['id'];
                     $contract_date = $row['contract_money_date'];
                     $contract_money = $row['contract_money'];
-                    echo "<tr><td>".$contract_id."</td><td>".$contract_date."</td><td>".$contract_money."</td></tr>";
+                    echo "<tr><td>".$contract_date."</td><td>".$contract_money."</td></tr>";
                   }
                 }
               ?>
             </table><br>
+            <label>區塊鏈密鑰：</label>
+            <?php 
+              $ret7=mysqli_query($link,"SELECT * FROM `Hash` where `contract_Key` = '$contract_Key';");
+              if (mysqli_num_rows($ret7)>0) {
+                  while($row7=mysqli_fetch_array($ret7)){
+                    $transactionHash = $row7['transactionHash'];
+                    echo $transactionHash; 
+                  }
+              } else {
+                echo "尚未儲存至區塊鏈";
+              }
+            ?><br>
             </form>
         </fieldset>
     </body>

@@ -7,8 +7,6 @@ var savePNGButton = wrapper.querySelector("[data-action=save-png]");
 var saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
 var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
 var saveSVGButton = document.getElementById("save");
-var signature_A = document.getElementById("signature_A");
-var signature_B = document.getElementById("signature_B");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
@@ -45,7 +43,7 @@ resizeCanvas();
 
 function download(dataURL, filename) {
   if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("Chrome") === -1) {
-    window.open(dataURL);
+    window.open(dataURL, 'Econtract');
   } else {
     var blob = dataURLToBlob(dataURL);
     var url = window.URL.createObjectURL(blob);
@@ -123,8 +121,11 @@ saveSVGButton.addEventListener("click", function (event) {
   if (signaturePad.isEmpty()) {
     alert("Please provide a signature first.");
   } else {
-    var dataURL = signaturePad.toDataURL('image/svg+xml');
-    download(dataURL, "signature.svg");
-    location.href="../create/create.html";
+    var dataURL = signaturePad.toDataURL();
+    var role = document.getElementById("role").value;
+    var contract_Key = document.getElementById("contract_Key").value;
+    // var url = dataURLToBlob(dataURL);
+    // download(dataURL, "signature.png");
+    location.href="../create_step/signing.php?dataURL="+dataURL+"&&role="+role+"&&contract_Key="+contract_Key;
   }
 });

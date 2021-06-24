@@ -4,15 +4,21 @@ function createEth() {
     if(confirmpwd()) {
         try {
             var pwd = document.getElementById('pwd').value;
-            var eth_account = document.getElementById('eth_account');
-            this.web3.eth.personal.newAccount(pwd).then(function(){
-                web3.eth.getAccounts().then(function(res){ accounts = res;});
-            });
-            var accounts_len = accounts.length;
-            EthAccount = accounts[accounts_len - 1];
-            eth_account.value = EthAccount;
-            console.log(eth_account.value);
-            return true;
+            // var eth = document.getElementById('eth');
+            // var accounts = [];
+            // var accounts_len = 0;
+            // this.web3.eth.personal.newAccount(pwd).then(function(){
+                this.web3.eth.getAccounts().then(function(res){ 
+                    // accounts = res;
+                    // accounts_len = res.length;
+                    EthAccount = res[0];
+                    // eth.innerHTML = "<input type='hidden' id='eth_account' name='eth_account' value='"+ EthAccount +"'>";
+                    // console.log(EthAccount);
+                    this.document.getElementById("eth_account").value = EthAccount;
+                    // chk();
+                    // return EthAccount;
+                });
+            // });
     //         let balance = await web3.eth.getBalance(EthAccount);
     //         var html_account = document.getElementById("account");
     //         var html_balance = document.getElementById("balance");
@@ -65,5 +71,15 @@ function confirmpwd() {
             err2.innerHTML="";
             return true;
         }
+    }
+}
+
+function chk() {
+    createEth();
+    var eth_account = document.getElementById('eth_account').value; 
+    if(eth_account != "null") {
+        this.window.setTimeout(( () => {return true;} ), 2000);
+    } else {
+        return false;
     }
 }

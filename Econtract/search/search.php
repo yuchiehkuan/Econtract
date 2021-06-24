@@ -1,7 +1,7 @@
 <?php
     session_start(); 
     include "../db.php";
-    $contract_Key = $_GET['contract_Key'];
+    $transactionHash = $_GET['transactionHash'];
     $search = $_GET['search'];
 ?>
 <html>
@@ -18,7 +18,7 @@
             <li class="dropdown">
               <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars fa-1g"></i></a>
               <div class="dropdown-content">
-                <a href="../account/account.html">帳號資訊</a>
+                <a href="../account/account.php">帳號資訊</a>
                 <a href="../create/create.html">創建合約</a>
                 <a href="#home">查詢合約</a>
                 <a href="../transaction/transaction.html">系統對帳</a>
@@ -35,15 +35,21 @@
             <table> 
             <?php 
                 if($search == "not null") {
-                    if($contract_Key) {
-                        $ret=mysqli_query($link,"SELECT * FROM `contract` where `contract_Key`='$contract_Key' and  `contract_time` is not null;");
+                    if($transactionHash) {
+                        $ret=mysqli_query($link,"SELECT * FROM `Hash` where `transactionHash`='$transactionHash';");
                         if (mysqli_num_rows($ret)>0) {
-                            echo "<th>合約名稱</th><th>合約金鑰</th><th>合約時間</th><th>操作</th>";
                             while($row=mysqli_fetch_array($ret)){
-                                $contract_name = $row['contract_name'];
                                 $contract_Key = $row['contract_Key'];
-                                $contract_time = $row['contract_time'];
-                                echo "<tr><td>".$contract_name."</td><td>".$contract_Key."</td><td>".$contract_time."</td><td><a href='../create/created.php?contract_Key=$contract_Key'><i class='fas fa-eye'></i></a></td></tr>";
+                                $upload_date = $row['upload_date'];
+                            }
+                        }
+                        $ret2=mysqli_query($link,"SELECT * FROM `contract` where `contract_Key`='$contract_Key';");
+                        if (mysqli_num_rows($ret2)>0) {
+                            echo "<th>合約名稱</th><th>合約金鑰</th><th>合約時間</th><th>操作</th>";
+                            while($row2=mysqli_fetch_array($ret2)){
+                                $contract_name = $row2['contract_name'];
+                                $contract_Key = $row2['contract_Key'];
+                                echo "<tr><td>".$contract_name."</td><td>".$contract_Key."</td><td>".$upload_date."</td><td><a href='../create/created.php?contract_Key=$contract_Key'><i class='fas fa-eye'></i></a></td></tr>";
                             }
                         } else {
                             echo "<span style='color: red;'>查無合約資訊！</span>";

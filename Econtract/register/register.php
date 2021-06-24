@@ -11,6 +11,7 @@
     $mobile = $_POST['mobile'];
     $address = $_POST['address'];
     $eth_account = $_POST['eth_account'];
+    // echo $eth_account;
 
     // $chkvalue = [{id: 'account', value: $account} , {id: 'password', value: $password}, {id: 'firstname', value: $firstname}, {id: 'lastname', value: $lastname}, {id: 'gender', value: $gender}, {id: 'mobile', value: $mobile},  {id: 'email', value: $email}];
 

@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Econtract project",
   "dependencies": {
+    "buffer": "^6.0.3",
     "ganache-cli": "^6.12.2",
     "http-server": "^0.12.3",
     "js-cookie": "^2.2.1",
+    "require": "^2.4.20",
     "web3": "^1.0.0-beta.29"
   }
 }
