@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php 
+  session_start(); 
+  include "../../../db.php";
+  $account = $_SESSION['account'];
+  $contract_name = $_POST['contract_name'];
+  $contract_purpose = $_POST['contract_purpose'];
+?>
 <html lang="en">
 
 <head>
@@ -9,17 +15,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Econtract - Home</title>
+    <title>Econtract - Transaction</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../../../css/sb-admin-2.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../../../node_modules/web3/dist/web3.min.js"></script>
+    <script src="../../../js/create.js"></script> 
 </head>
 
 <body id="page-top">
@@ -31,7 +38,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#home">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-pen-fancy"></i>
                 </div>
@@ -43,7 +50,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="./webpage/create/create.html">
+                <a class="nav-link" href="../create.html">
                     <i class="fas fa-fw fa-file-contract"></i>
                     <span>創建合約</span></a>
             </li>
@@ -51,14 +58,14 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item">
-                <a class="nav-link" href="./webpage/search/search.php">
+                <a class="nav-link" href="../../search/search.php">
                     <i class="fas fa-search fa-fw"></i>
                     <span>合約查詢</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link" href="./webpage/transaction.html">
+                <a class="nav-link" href="../../transaction.html">
                     <i class="fas fa-hand-holding-usd fa-fw"></i>
                     <span>系統對帳</span></a>
             </li>
@@ -95,12 +102,12 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">帳號資訊</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/user-tie-solid.svg">
+                                    src="../../../img/user-tie-solid.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="./webpage/account/account.php">
+                                <a class="dropdown-item" href="../../account/account.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     帳號資訊
                                 </a>
@@ -119,9 +126,29 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                  <h1 class="h3 mb-4 text-gray-800 text-center">立書人</h1>
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Welcome Back</h1>
+                    <fieldset>
+                        <form class="user" action="./create3.php" method="POST">
+                          <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                              <label  for="contract_person_A">甲方</label>
+                              <input type="radio" class="form-control form-control-user" id="contract_person_A" name="contract_person"
+                                value="A">
+                            </div>
+                            <div class="col-sm-6">
+                              <label  for="contract_person_A" >乙方</label>
+                              <input type="radio" class="form-control form-control-user" id="contract_person_B" name="contract_person"
+                                value="B">
+                            </div>
+                          </div>
+                            <?php
+                              echo "<input type='hidden' id='contract_name' name='contract_name' value='".$contract_name."'>";
+                              echo "<input type='hidden' id='contract_purpose' name='contract_purpose' value='".$contract_purpose."'>";
+                            ?>
+                            <input type="submit" class="btn btn-primary btn-user btn-block" value="Next">
+                        </form>
+                    </fieldset>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -164,21 +191,21 @@
                 <div class="modal-body">如果您確定要離開，點選登出離開系統。</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
-                    <a class="btn btn-primary" href="./webpage/login/login.html">登出</a>
+                    <a class="btn btn-primary" href="../../login/login.html">登出</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../../../js/sb-admin-2.min.js"></script>
 
 </body>
 

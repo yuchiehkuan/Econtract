@@ -1,6 +1,6 @@
 <?php session_start(); 
   if ($_SESSION["account"] == "") {
-    $url = "./login/login.html";
+    $url = "./webpage/login/login.html";
   } else {
     $url = "./home.html";
   }
