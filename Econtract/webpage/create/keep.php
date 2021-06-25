@@ -155,7 +155,8 @@
                                                         $ret2=mysqli_query($link,"SELECT * FROM `contract_sign` where `contract_Key` = '$contract_Key' and `account`='$account';");
                                                         if (mysqli_num_rows($ret2)>0) {
                                                             $ret3=mysqli_query($link,"SELECT * FROM `Hash` where `contract_Key` = '$contract_Key';");
-                                                            if (mysqli_num_rows($ret3)>0) {
+                                                            $ret4=mysqli_query($link,"SELECT * FROM `contract_sign` where `contract_Key` = '$contract_Key';");
+                                                            if (mysqli_num_rows($ret3)>0 || mysqli_num_rows($ret4)<2) {
                                                                 echo "<tr><td>".$contract_name."</td><td>".$contract_Key."</td><td><a href='./created.php?contract_Key=$contract_Key'><i class='fas fa-eye'></i></a>｜<a href='./create_step/delete.php?contract_Key=$contract_Key'><i class='fas fa-trash-alt'></i></a></td></tr>";
                                                             } else {
                                                                 echo "<tr><td>".$contract_name."</td><td>".$contract_Key."</td><td><a href='./created.php?contract_Key=$contract_Key'><i class='fas fa-eye'></i></a>｜<a href='./create_step/delete.php?contract_Key=$contract_Key'><i class='fas fa-trash-alt'></i></a>｜<a href='./signed/senfTransaction.php?contract_Key=$contract_Key'><i class='fab fa-ethereum'></i></a></td></tr>";

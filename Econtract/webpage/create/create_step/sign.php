@@ -1,6 +1,6 @@
 <?php 
   session_start(); 
-  include "../../db.php";
+  include "../../../db.php";
   $contract_Key = $_GET['contract_Key'];
   $account = $_SESSION['account'];
     $ret2=mysqli_query($link,"SELECT * FROM `contract` where `contract_Key`='$contract_Key';");
@@ -53,7 +53,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../../css/sb-admin-2.min.css" rel="stylesheet">
     <script type="text/javascript" src="../../../node_modules/web3/dist/web3.min.js"></script>
     <script type="text/javascript" src="../../../js/create.js"></script> 
 </head>

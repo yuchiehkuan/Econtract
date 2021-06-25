@@ -19,7 +19,7 @@
             }
             $_SESSION['account'] = $account;
             $_SESSION['name'] = $user_name;
-            $_SESSION['gender'] = $gender = '女士';
+            $_SESSION['gender'] = $gender;
         }
         $url = "../../home.html";
         echo "<script type='text/javascript'>";

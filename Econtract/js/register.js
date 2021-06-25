@@ -11,7 +11,7 @@ function createEth() {
                 this.web3.eth.getAccounts().then(function(res){ 
                     // accounts = res;
                     // accounts_len = res.length;
-                    EthAccount = res[0];
+                    EthAccount = res[1];
                     // eth.innerHTML = "<input type='hidden' id='eth_account' name='eth_account' value='"+ EthAccount +"'>";
                     // console.log(EthAccount);
                     this.document.getElementById("eth_account").value = EthAccount;
